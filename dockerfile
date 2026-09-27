@@ -1,12 +1,15 @@
 FROM python:3.12
 
-COPY ./requirements.txt /bibip/requirements.txt
-RUN pip install -r /bibip/requirements.txt
+COPY ./requirements.txt /autoledger/requirements.txt
 
-COPY ./src /bibip/src
-COPY ./tests /bibip/tests
+RUN pip install -r /autoledger/requirements.txt
 
-ENV PYTHONPATH "${PYTHONPATH}:/bibip:/bibip/src"
+COPY ./src /autoledger/src
 
-WORKDIR /bibip
+COPY ./tests /autoledger/tests
+
+ENV PYTHONPATH "${PYTHONPATH}:/autoledger:/autoledger/src"
+
+WORKDIR /autoledger
+
 CMD ["tail", "-f", "/dev/null"]
